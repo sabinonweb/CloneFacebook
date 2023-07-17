@@ -101,6 +101,10 @@ const Stories = () => {
     setShowFullImage(false);
   };
 
+  const handleClosePlus = () => {
+    setPlusClicked(false);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -140,6 +144,13 @@ const Stories = () => {
                             <Image
                               source={require("./components/white.jpeg")}
                               style={styles.plusImage}
+                            />
+                            <AntDesign
+                              size={24}
+                              name="closecircle"
+                              color="black"
+                              style={styles.antClosePlus}
+                              onPress={handleClosePlus}
                             />
                             <TextInput
                               placeholder="Type Something"
@@ -296,10 +307,16 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     borderRadius: 5,
-    marginTop: 70,
+    marginTop: 100,
     marginLeft: 20,
     width: "90%",
     display: "flex",
     justifyContent: "flex-start",
+    height: 100,
+  },
+  antClosePlus: {
+    position: "absolute",
+    bottom: 850,
+    left: 380,
   },
 });
