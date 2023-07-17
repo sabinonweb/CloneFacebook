@@ -9,6 +9,8 @@ import {
 import React, { useState } from "react";
 import { FlatList } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { TextInput } from "react-native";
 
 const Stories = () => {
   const main = [
@@ -76,10 +78,23 @@ const Stories = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [showFullImage, setShowFullImage] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [plusClicked, setPlusClicked] = useState(false);
 
-  const handleImage = (item) => {
+  const handleImage = (item, index) => {
     setSelectedImage(item);
     setShowFullImage(true);
+    setCurrentIndex(index);
+  };
+
+  const handlePlus = () => {
+    setPlusClicked(true);
+  };
+
+  const handleBackwardImagePress = () => {
+    setCurrentIndex((prevImage) =>
+      prevImage > 0 ? prevImage - 1 : main.length - 1
+    );
   };
 
   const handleCloseImage = (item) => {
@@ -104,23 +119,41 @@ const Stories = () => {
                 {index === 0 && (
                   <View>
                     <View>
-                      <TouchableOpacity onPress={() => handleImage(item)}>
-                        <Image style={styles.image1} source={item.story} />
-                        <Image style={styles.dp} source={item.content} />
-                        <Text style={styles.add}>
-                          Add {"\n"}to{"\n"} story
-                        </Text>
+                      <Image style={styles.image1} source={item.story} />
+                      <Image style={styles.dp} source={item.content} />
+                      <Text style={styles.add}>
+                        Add {"\n"}to{"\n"} story
+                      </Text>
+                      <TouchableOpacity onPress={handlePlus}>
                         <Image
                           style={styles.plus}
                           source={require("./components/mainplus.png")}
                         />
                       </TouchableOpacity>
+                      {plusClicked && (
+                        <View style={styles.plusContainer}>
+                          <Modal
+                            transparent={true}
+                            animationType="slide"
+                            style={styles.plusModal}
+                          >
+                            <Image
+                              source={require("./components/white.jpeg")}
+                              style={styles.plusImage}
+                            />
+                            <TextInput
+                              placeholder="Type Something"
+                              style={styles.plusText}
+                            ></TextInput>
+                          </Modal>
+                        </View>
+                      )}
                     </View>
                   </View>
                 )}
                 {index !== 0 && (
                   <View>
-                    <TouchableOpacity onPress={() => handleImage(item)}>
+                    <TouchableOpacity onPress={() => handleImage(item, index)}>
                       <Image style={styles.image} source={item.story} />
                       <Image style={styles.dp} source={item.content} />
                     </TouchableOpacity>
@@ -132,15 +165,35 @@ const Stories = () => {
         />
 
         {selectedImage && (
-          <Modal
-            style={styles.modal}
-            visible={showFullImage}
-            animationType="slide"
-          >
-            <View style={styles.modalContainer}>
-              <Image source={selectedImage.story} style={styles.modalImage} />
-            </View>
-          </Modal>
+          <View>
+            <Modal
+              style={styles.modal}
+              visible={showFullImage}
+              animationType="slide"
+            >
+              <View style={styles.modalContainer}>
+                <Image source={selectedImage.story} style={styles.modalImage} />
+              </View>
+
+              <View style={styles.antContainer}>
+                <AntDesign
+                  name="closecircle"
+                  size={24}
+                  color="red"
+                  onPress={handleCloseImage}
+                  style={styles.ant}
+                />
+                <TouchableOpacity onPress={handleBackwardImagePress}>
+                  <AntDesign
+                    size={24}
+                    color="black"
+                    style={styles.backwardAnt}
+                    name="arrowleft"
+                  />
+                </TouchableOpacity>
+              </View>
+            </Modal>
+          </View>
         )}
       </View>
     </SafeAreaView>
@@ -214,5 +267,39 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 10,
     resizeMode: "cover",
+  },
+  ant: {
+    position: "absolute",
+    bottom: 850,
+    left: 400,
+  },
+  backwardAnt: {
+    position: "absolute",
+    bottom: 450,
+    left: 20,
+  },
+  plusContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  plusModal: {
+    flex: 1,
+  },
+  plusImage: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  plusText: {
+    backgroundColor: "transparent",
+    borderWidth: 0.5,
+    borderColor: "black",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 70,
+    marginLeft: 20,
+    width: "90%",
+    display: "flex",
+    justifyContent: "flex-start",
   },
 });
