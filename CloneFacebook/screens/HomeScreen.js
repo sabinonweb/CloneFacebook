@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import App from "./components/Post";
 import Stories from "./Stories";
+import Posts from "./Posts";
 
 const HomeScreen = () => {
   return (
@@ -40,8 +41,12 @@ const HomeScreen = () => {
           <App></App>
         </View>
 
-        <View style={styles.container}>
+        <View style={styles.containerStories}>
           <Stories></Stories>
+        </View>
+
+        <View style={styles.container}>
+          <Posts></Posts>
         </View>
       </View>
     </SafeAreaView>
@@ -50,6 +55,9 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  containerStories: {
     flex: 1,
   },
   home: {
