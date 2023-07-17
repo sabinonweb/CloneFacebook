@@ -84,7 +84,6 @@ const Stories = () => {
   const handleImage = (item, index) => {
     setSelectedImage(item);
     setShowFullImage(true);
-    setCurrentIndex(index);
   };
 
   const handlePlus = () => {
@@ -92,8 +91,16 @@ const Stories = () => {
   };
 
   const handleBackwardImagePress = () => {
-    setCurrentIndex((prevImage) =>
-      prevImage > 0 ? prevImage - 1 : main.length - 1
+    setCurrentIndex(
+      (prevImage) => (prevImage > 0 ? prevImage - 1 : main.length - 1),
+      console.log(currentIndex)
+    );
+  };
+
+  const handelForwardImagePress = () => {
+    setCurrentIndex(
+      (prevImage) => (prevImage < main.length - 1 ? prevImage + 1 : 0),
+      console.log(currentIndex)
     );
   };
 
@@ -112,6 +119,7 @@ const Stories = () => {
       </View>
       <View style={styles.container1}>
         <FlatList
+          style={{ height: 200 }}
           horizontal
           pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
@@ -197,9 +205,18 @@ const Stories = () => {
                 <TouchableOpacity onPress={handleBackwardImagePress}>
                   <AntDesign
                     size={24}
-                    color="black"
+                    color="white"
                     style={styles.backwardAnt}
-                    name="arrowleft"
+                    name="caretleft"
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={handelForwardImagePress}>
+                  <AntDesign
+                    size={24}
+                    color="white"
+                    style={styles.forwardAnt}
+                    name="caretright"
                   />
                 </TouchableOpacity>
               </View>
@@ -286,8 +303,13 @@ const styles = StyleSheet.create({
   },
   backwardAnt: {
     position: "absolute",
-    bottom: 450,
+    bottom: 20,
     left: 20,
+  },
+  forwardAnt: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
   },
   plusContainer: {
     display: "flex",
