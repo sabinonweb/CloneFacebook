@@ -5,9 +5,10 @@ import {
   FlatList,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { useEffect, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const Posts = () => {
   const Data = [
@@ -18,6 +19,7 @@ const Posts = () => {
       content: "This is the content of the first post.",
       author: "John Doe",
       date: "2023-07-17",
+      liked: false,
     },
     {
       id: 2,
@@ -26,6 +28,7 @@ const Posts = () => {
       content: "This is the content of the second post.",
       author: "Jane Smith",
       date: "2023-07-18",
+      liked: false,
     },
     {
       id: 3,
@@ -34,6 +37,7 @@ const Posts = () => {
       content: "This is the content of the third post.",
       author: "Alex Johnson",
       date: "2023-07-19",
+      liked: false,
     },
     {
       id: 4,
@@ -42,6 +46,7 @@ const Posts = () => {
       content: "This is the content of the fourth post.",
       author: "Emily Brown",
       date: "2023-07-20",
+      liked: false,
     },
     {
       id: 5,
@@ -50,6 +55,7 @@ const Posts = () => {
       content: "This is the content of the fifth post.",
       author: "Michael Lee",
       date: "2023-07-21",
+      liked: false,
     },
     {
       id: 6,
@@ -58,6 +64,7 @@ const Posts = () => {
       content: "This is the content of the sixth post.",
       author: "Sophia Chen",
       date: "2023-07-22",
+      liked: false,
     },
     {
       id: 7,
@@ -66,6 +73,7 @@ const Posts = () => {
       content: "This is the content of the seventh post.",
       author: "William Kim",
       date: "2023-07-23",
+      liked: false,
     },
     {
       id: 8,
@@ -74,8 +82,22 @@ const Posts = () => {
       content: "This is the content of the eighth post.",
       author: "Olivia Anderson",
       date: "2023-07-24",
+      liked: false,
     },
   ];
+
+  const [isLiked, setIsLiked] = useState(Data.map((item) => ({ ...item })));
+
+  const handleLikePressed = (pressedId) => {
+    setIsLiked((prevData) =>
+      prevData.map(
+        (item) =>
+          item.id === pressedId ? { ...item, liked: !item.liked } : item,
+        console.log(isLiked),
+        console.log("pressed")
+      )
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -95,6 +117,16 @@ const Posts = () => {
               </View>
               <View style={styles.dateContainer}>
                 <Text style={styles.date}>{item.date}</Text>
+              </View>
+              <View>
+                <TouchableOpacity onPress={() => handleLikePressed(item.id)}>
+                  <Ionicons
+                    name="heart"
+                    size={24}
+                    color={item.liked ? "red" : "black"}
+                    style={styles.like}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -156,5 +188,9 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 15,
     fontWeight: 700,
+  },
+  like: {
+    left: 250,
+    bottom: 230,
   },
 });
