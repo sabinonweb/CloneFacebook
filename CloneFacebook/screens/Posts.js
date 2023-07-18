@@ -20,6 +20,8 @@ const Posts = () => {
       author: "John Doe",
       date: "2023-07-17",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 2,
@@ -29,15 +31,19 @@ const Posts = () => {
       author: "Jane Smith",
       date: "2023-07-18",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 3,
       photo: require("./components/sheldon.jpeg"),
       title: "Third Post",
       content: "This is the content of the third post.",
-      author: "Alex Johnson",
+      author: "Sheldon",
       date: "2023-07-19",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/sheldon.jpeg"),
     },
     {
       id: 4,
@@ -47,6 +53,8 @@ const Posts = () => {
       author: "Emily Brown",
       date: "2023-07-20",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 5,
@@ -56,6 +64,8 @@ const Posts = () => {
       author: "Michael Lee",
       date: "2023-07-21",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 6,
@@ -65,6 +75,8 @@ const Posts = () => {
       author: "Sophia Chen",
       date: "2023-07-22",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 7,
@@ -74,6 +86,8 @@ const Posts = () => {
       author: "William Kim",
       date: "2023-07-23",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
     {
       id: 8,
@@ -83,6 +97,8 @@ const Posts = () => {
       author: "Olivia Anderson",
       date: "2023-07-24",
       liked: false,
+      datePng: require("./components/time.png"),
+      dp: require("./components/don.jpg"),
     },
   ];
 
@@ -115,6 +131,12 @@ const Posts = () => {
               <View style={styles.contentContainer}>
                 <Text style={styles.content}>{item.content}</Text>
               </View>
+              <View>
+                <Image source={item.datePng} style={styles.datePng} />
+              </View>
+              <View>
+                <Image source={item.dp} style={styles.dp} />
+              </View>
               <View style={styles.dateContainer}>
                 <Text style={styles.date}>{item.date}</Text>
               </View>
@@ -122,11 +144,31 @@ const Posts = () => {
                 <TouchableOpacity onPress={() => handleLikePressed(item.id)}>
                   <Ionicons
                     name="heart"
-                    size={24}
+                    size={28}
                     color={item.liked ? "red" : "black"}
                     style={styles.like}
                   />
                 </TouchableOpacity>
+                <Ionicons
+                  name="chatbubble-ellipses"
+                  size={26}
+                  color="black"
+                  style={styles.comment}
+                />
+                <Ionicons
+                  name="arrow-redo-circle"
+                  size={28}
+                  color="black"
+                  style={styles.share}
+                />
+              </View>
+              <View>
+                <Ionicons
+                  name="mail-open"
+                  size={28}
+                  color="black"
+                  style={styles.doc}
+                />
               </View>
             </View>
           </View>
@@ -148,18 +190,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#C0C0C0",
   },
   insideContainer: {
-    borderWidth: 2,
-    borderRadius: 20,
-    padding: 10,
+    borderWidth: 1,
+    borderTopEndRadius: 100,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 20,
+    borderTopLeftRadius: 30,
+    padding: 5,
     display: "flex",
     alignItems: "flex-start",
     margin: 10,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 395,
+    height: 300,
     resizeMode: "cover",
-    borderRadius: 10,
+    borderRadius: 20,
+    marginTop: 80,
   },
   textContainer: {
     display: "flex",
@@ -170,6 +216,8 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 25,
     fontWeight: "bold",
+    bottom: 180,
+    right: 180,
   },
   contentContainer: {
     flex: 1,
@@ -180,6 +228,8 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 20,
     fontWeight: 900,
+    top: 50,
+    left: 50,
   },
   dateContainer: {
     flex: 1,
@@ -188,9 +238,38 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 15,
     fontWeight: 700,
+    left: 90,
+    bottom: 460,
   },
   like: {
-    left: 250,
-    bottom: 230,
+    left: 10,
+    bottom: 140,
+  },
+  comment: {
+    left: 50,
+    bottom: 170,
+  },
+  share: {
+    left: 90,
+    bottom: 200,
+  },
+  datePng: {
+    height: 20,
+    width: 20,
+    bottom: 410,
+    left: 65,
+  },
+  dp: {
+    height: 50,
+    width: 50,
+    left: 10,
+    borderRadius: 100,
+    bottom: 460,
+  },
+  doc: {
+    width: 50,
+    height: 50,
+    bottom: 183,
+    left: 10,
   },
 });
