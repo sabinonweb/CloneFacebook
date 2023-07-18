@@ -6,7 +6,7 @@ import {
   Image,
   Modal,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -90,7 +90,7 @@ const Stories = () => {
     setPlusClicked(true);
   };
 
-  const handleBackwardImagePress = () => {
+  const handleBackwardImagePress = (item) => {
     setCurrentIndex(
       (prevImage) => (prevImage > 0 ? prevImage - 1 : main.length - 1),
       console.log(currentIndex)
@@ -103,6 +103,13 @@ const Stories = () => {
       console.log(currentIndex)
     );
   };
+
+  useEffect(() => {
+    console.log(currentIndex);
+    if (currentIndex > 0 && currentIndex < main.length) {
+      setShowFullImage(main[currentIndex]);
+    }
+  }, [currentIndex]);
 
   const handleCloseImage = (item) => {
     setShowFullImage(false);
@@ -185,11 +192,7 @@ const Stories = () => {
 
         {selectedImage && (
           <View>
-            <Modal
-              style={styles.modal}
-              visible={showFullImage}
-              animationType="slide"
-            >
+            <Modal visible={showFullImage} animationType="slide">
               <View style={styles.modalContainer}>
                 <Image source={selectedImage.story} style={styles.modalImage} />
               </View>
@@ -202,22 +205,36 @@ const Stories = () => {
                   onPress={handleCloseImage}
                   style={styles.ant}
                 />
-                <TouchableOpacity onPress={handleBackwardImagePress}>
-                  <AntDesign
+                <TouchableOpacity
+                  onPress={handleBackwardImagePress}
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {/* <AntDesign
                     size={24}
                     color="white"
                     style={styles.backwardAnt}
                     name="caretleft"
-                  />
+                  /> */}
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={handelForwardImagePress}>
-                  <AntDesign
+                <TouchableOpacity
+                  onPress={handelForwardImagePress}
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  {/* <AntDesign
                     size={24}
                     color="white"
                     style={styles.forwardAnt}
                     name="caretright"
-                  />
+                  /> */}
                 </TouchableOpacity>
               </View>
             </Modal>
@@ -232,7 +249,7 @@ export default Stories;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.6,
   },
   container1: {
     flex: 1,
