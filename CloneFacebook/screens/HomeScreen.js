@@ -6,12 +6,17 @@ import {
   Button,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import App from "./components/Post";
 import Stories from "./Stories";
 import Posts from "./Posts";
 
 const HomeScreen = () => {
+  const serchButtonPressHandler = () => {
+    console.log("Pressed");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -19,12 +24,14 @@ const HomeScreen = () => {
           <Text style={styles.home}>facebook</Text>
         </View>
 
-        <View style={styles.iconContainer}>
-          <Image
-            source={require("../assets/search.png")}
-            style={styles.search}
-          />
-        </View>
+        <TouchableOpacity onPress={serchButtonPressHandler}>
+          <View style={styles.iconContainer}>
+            <Image
+              source={require("../assets/search.png")}
+              style={styles.search}
+            />
+          </View>
+        </TouchableOpacity>
 
         <View style={styles.iconContainer}>
           <Image
@@ -41,11 +48,12 @@ const HomeScreen = () => {
           <App></App>
         </View>
 
-        <View style={styles.containerStories}>
+        {/* <View style={styles.containerStories}>
           <Stories></Stories>
-        </View>
+        </View> */}
 
-        <View style={styles.container}>
+        <View style={styles.containerPosts}>
+          <Stories></Stories>
           <Posts></Posts>
         </View>
       </View>
@@ -58,7 +66,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerStories: {
-    flex: 1,
+    flex: 0.8,
+    backgroundColor: "yellow",
+  },
+  containerPosts: {
+    flex: 1.2,
   },
   home: {
     fontSize: 30,
@@ -74,8 +86,8 @@ const styles = StyleSheet.create({
     height: 25,
     width: 30,
     justifyContent: "center",
-    marginLeft: 350,
-    marginTop: 10,
+    marginLeft: 355,
+    marginTop: -35,
   },
   messenger: {
     height: 30,

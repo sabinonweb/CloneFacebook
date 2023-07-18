@@ -57,7 +57,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1.2,
   },
   home: {
     fontSize: 18,
