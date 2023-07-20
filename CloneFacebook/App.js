@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Settings from "./screens/Settings";
 import Profile from "./screens/Profile.js";
+import SellerModeOff from "./screens/SellerModeOff";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,6 @@ const App = () => {
             } else if (route.name === "Profile") {
               iconName = focused ? "person-circle" : "person-circle-outline";
             }
-
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: "green",

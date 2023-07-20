@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import SellerModeOff from "./SellerModeOff";
 
-const Profile = () => {
+const SellerModeOn = () => {
   const sellerData = [
     {
       name: "My Profile",
@@ -58,16 +58,11 @@ const Profile = () => {
   ];
 
   const [switchClicked, setSwitchClicked] = useState(false);
-  const [changeMode, setChangeMode] = useState(false);
   const handleSwitch = () => {
     setSwitchClicked((prevState) => !prevState);
-    setChangeMode((prevMode) => !prevMode);
   };
 
-  return changeMode ? (
-    <SellerModeOff></SellerModeOff>
-  ) : (
-    //SellerModeOn
+  return (
     <SafeAreaView style={{ flex: 1 }}>
       <View
         style={{
@@ -220,4 +215,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default SellerModeOn;
