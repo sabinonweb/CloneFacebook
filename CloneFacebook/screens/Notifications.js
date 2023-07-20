@@ -11,9 +11,6 @@ import {
 import { useState } from "react";
 
 const Notifications = ({}) => {
-  const [checkClick, setCheckClick] = useState(false);
-  const [checkColour, setCheckColor] = useState("grey");
-
   const Data = [
     {
       userName: "John Doe",
@@ -22,6 +19,7 @@ const Notifications = ({}) => {
       image: require("./components/person.jpeg"),
       event: require("./components/like.png"),
       id: "1",
+      click: false,
     },
     {
       userName: "Random Sia",
@@ -30,6 +28,7 @@ const Notifications = ({}) => {
       image: require("./components/person.webp"),
       event: require("./components/invite.png"),
       id: "2",
+      click: false,
     },
     {
       userName: "Taylor Love",
@@ -38,6 +37,7 @@ const Notifications = ({}) => {
       image: require("./components/pixel.jpeg"),
       event: require("./components/request.png"),
       id: "3",
+      click: false,
     },
     {
       userName: "Lost Fairytale",
@@ -46,6 +46,7 @@ const Notifications = ({}) => {
       image: require("./components/leaf.jpeg"),
       event: require("./components/invite.png"),
       id: "4",
+      click: false,
     },
     {
       userName: "Sheldon Cooper",
@@ -54,6 +55,7 @@ const Notifications = ({}) => {
       image: require("./components/sheldon.jpeg"),
       event: require("./components/uplooad.png"),
       id: "5",
+      click: false,
     },
     {
       userName: "Apple",
@@ -62,6 +64,7 @@ const Notifications = ({}) => {
       image: require("./components/apple.jpeg"),
       event: require("./components/added.png"),
       id: "6",
+      click: false,
     },
     {
       userName: "Air Ram",
@@ -70,6 +73,7 @@ const Notifications = ({}) => {
       image: require("./components/ram.jpeg"),
       event: require("./components/host.png"),
       id: "7",
+      click: false,
     },
     {
       userName: "Alice Man",
@@ -78,6 +82,7 @@ const Notifications = ({}) => {
       image: require("./components/pixel1.jpeg"),
       event: require("./components/comment.png"),
       id: "8",
+      click: false,
     },
     {
       userName: "Bob Malan",
@@ -86,6 +91,7 @@ const Notifications = ({}) => {
       image: require("./components/pixel2.jpeg"),
       event: require("./components/host.png"),
       id: "9",
+      click: false,
     },
     {
       userName: "David Alice",
@@ -94,11 +100,21 @@ const Notifications = ({}) => {
       image: require("./components/pixel3.jpeg"),
       event: require("./components/added.png"),
       id: "10",
+      click: false,
     },
   ];
 
-  const handleTouch = () => {
-    setCheckClick(true);
+  const [checkClick, setCheckClick] = useState(
+    Data.map((item) => ({ ...item }))
+  );
+  const [checkColour, setCheckColor] = useState("grey");
+
+  const handleTouch = (notificationId) => {
+    setCheckClick((prevData) =>
+      prevData.map((item) =>
+        notificationId === item.id ? { ...item, click: !item.click } : item
+      )
+    );
     setCheckColor("white");
   };
 
@@ -123,9 +139,10 @@ const Notifications = ({}) => {
           renderItem={({ item }) => (
             <View style={styles.notificationContainer}>
               <TouchableOpacity
-                onPress={handleTouch}
+                activeOpacity={0.9}
+                onPress={() => handleTouch(item.id)}
                 style={{
-                  backgroundColor: checkClick ? "white" : "grey",
+                  backgroundColor: item.click ? "white" : "grey",
                   padding: 10,
                   margin: 10,
                   shadowOpacity: 10,
