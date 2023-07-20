@@ -6,6 +6,7 @@ import Notifications from "./screens/Notifications";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Settings from "./screens/Settings";
+import Profile from "./screens/Profile.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Profile"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -26,11 +27,13 @@ const App = () => {
                 : "notifications-circle-outline";
             } else if (route.name === "Settings") {
               iconName = focused ? "settings" : "settings-outline";
+            } else if (route.name === "Profile") {
+              iconName = focused ? "person-circle" : "person-circle-outline";
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#1e90ff",
+          tabBarActiveTintColor: "green",
           tabBarInactiveTintColor: "black",
         })}
       >
@@ -39,16 +42,25 @@ const App = () => {
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false }}
+          backBehaviour="none"
         />
         <Tab.Screen
           name="Notifications"
           component={Notifications}
           options={{ headerShown: false }}
+          backBehaviour="order"
         />
         <Tab.Screen
           name="Settings"
           component={Settings}
           options={{ headerShown: false }}
+          backBehaviour="order"
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
+          backBehaviour="order"
         />
       </Tab.Navigator>
     </NavigationContainer>

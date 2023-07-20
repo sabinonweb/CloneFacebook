@@ -1,8 +1,17 @@
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  Appearance,
+} from "react-native";
 import React, { useState } from "react";
 import settings from "./components/settings.png";
 import { FlatList } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { Switch } from "react-native-gesture-handler";
+import { DarkTheme } from "@react-navigation/native";
 const Settings = () => {
   const [showData, setShowData] = useState(false);
   const Title = [
@@ -71,6 +80,10 @@ const Settings = () => {
     },
   ];
 
+  const handleDarkMode = () => {
+    console.log("pressed");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.menu}>
@@ -97,7 +110,7 @@ const Settings = () => {
                 onPress={() => setShowData(!showData)}
                 style={styles.touchableArea}
               >
-                <View>
+                <View style={styles.arrowContainer}>
                   {showData ? (
                     <Image
                       style={styles.arrow}
@@ -113,6 +126,15 @@ const Settings = () => {
               </TouchableOpacity>
               <Text style={styles.head}>{item.title}</Text>
               <Image style={styles.private} source={item.content} />
+              {item.id === 7 && (
+                <TouchableOpacity
+                  onPress={handleDarkMode}
+                  style={styles.darkModeTouchable}
+                >
+                  <Text>Dark Mode</Text>
+                  <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} />
+                </TouchableOpacity>
+              )}
             </View>
           )}
         />
@@ -218,6 +240,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
     shadowOpacity: 0.2,
+    alignItems: "flex-start",
   },
   arrow: {
     flex: 1,
@@ -226,6 +249,13 @@ const styles = StyleSheet.create({
     height: 18,
     width: 18,
     position: "absolute",
-    left: 400,
+    left: 20,
+  },
+  arrowContainer: {
+    justifyContent: "flex-end",
+  },
+  darkModeTouchable: {
+    display: "flex",
+    justifyContent: "center",
   },
 });

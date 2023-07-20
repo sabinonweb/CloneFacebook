@@ -139,6 +139,7 @@ const Notifications = ({}) => {
           renderItem={({ item }) => (
             <View style={styles.notificationContainer}>
               <TouchableOpacity
+                activeOpacity={0.9}
                 onPress={() => handleTouch(item.id)}
                 style={{
                   backgroundColor: item.click ? "white" : "grey",

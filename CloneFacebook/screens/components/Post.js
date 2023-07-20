@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, TouchableOpacity } from "react-native";
 
 const Post = () => {
   return (
@@ -20,9 +20,9 @@ const Post = () => {
         <View style={styles.profile}>
           <Image source={require("./image.png")} style={styles.image} />
         </View>
-      </View>
 
-      <View style={styles.divider}></View>
+        <View style={styles.divider}></View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     marginLeft: 10,
-    marginTop: -50,
+    marginTop: 50,
     borderRadius: 50,
   },
   input: {

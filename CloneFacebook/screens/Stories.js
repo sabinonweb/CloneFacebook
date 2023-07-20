@@ -134,7 +134,7 @@ const Stories = () => {
           keyExtractor={(item) => item.id}
           renderItem={({ item, index }) => (
             <View>
-              <View style={styles.container}>
+              <View style={styles.container2}>
                 {index === 0 && (
                   <View>
                     <View>
@@ -253,7 +253,10 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
+  },
+  container2: {
+    flex: 2,
   },
   text: {
     fontSize: 22,
@@ -262,20 +265,21 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 30,
     fontWeight: "bold",
-    marginTop: -20,
+    marginTop: 20,
   },
   image: {
     width: 100,
-    height: 100,
+    height: 150,
     borderWidth: 0,
     height: 200,
     width: 150,
     margin: 5,
     borderRadius: 20,
+    top: 10,
   },
   image1: {
     width: 100,
-    height: 100,
+    height: 150,
     borderWidth: 0,
     height: 200,
     width: 150,

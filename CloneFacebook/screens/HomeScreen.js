@@ -13,7 +13,7 @@ import Stories from "./Stories";
 import Posts from "./Posts";
 
 const HomeScreen = () => {
-  const serchButtonPressHandler = () => {
+  const searchButtonPressHandler = () => {
     console.log("Pressed");
   };
 
@@ -24,7 +24,7 @@ const HomeScreen = () => {
           <Text style={styles.home}>facebook</Text>
         </View>
 
-        <TouchableOpacity onPress={serchButtonPressHandler}>
+        <TouchableOpacity>
           <View style={styles.iconContainer}>
             <Image
               source={require("../assets/search.png")}
@@ -40,17 +40,15 @@ const HomeScreen = () => {
           />
         </View>
 
-        <View style={styles.iconContainer}>
-          <Image source={require("../assets/plus.png")} style={styles.plus} />
-        </View>
+        <TouchableOpacity onPress={searchButtonPressHandler}>
+          <View style={styles.iconContainer}>
+            <Image source={require("../assets/plus.png")} style={styles.plus} />
+          </View>
+        </TouchableOpacity>
 
         <View>
           <App></App>
         </View>
-
-        {/* <View style={styles.containerStories}>
-          <Stories></Stories>
-        </View> */}
 
         <View style={styles.containerPosts}>
           <Stories></Stories>
@@ -86,8 +84,9 @@ const styles = StyleSheet.create({
     height: 25,
     width: 30,
     justifyContent: "center",
-    marginLeft: 355,
-    marginTop: -35,
+    position: "absolute",
+    left: 355,
+    top: -35,
   },
   messenger: {
     height: 30,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 25,
     marginLeft: 320,
-    marginTop: -5,
+    top: -50,
   },
 });
 
