@@ -7,7 +7,7 @@ import {
   ScrollView,
   Switch,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import SellerModeOff from "./SellerModeOff";
 
@@ -58,14 +58,15 @@ const Profile = () => {
   ];
 
   const [switchClicked, setSwitchClicked] = useState(false);
-  const [changeMode, setChangeMode] = useState(false);
   const handleSwitch = () => {
     setSwitchClicked((prevState) => !prevState);
-    setChangeMode((prevMode) => !prevMode);
   };
 
-  return changeMode ? (
-    <SellerModeOff></SellerModeOff>
+  return !switchClicked ? (
+    <SellerModeOff
+      handleSwitch={handleSwitch}
+      switchClicked={switchClicked}
+    ></SellerModeOff>
   ) : (
     //SellerModeOn
     <SafeAreaView style={{ flex: 1 }}>
@@ -75,13 +76,13 @@ const Profile = () => {
           backgroundColor: "#233028",
           justifyContent: "flex-start",
           alignItems: "flex-end",
-          marginTop: -59,
+          // marginTop: -59,
         }}
       >
         <Ionicons
           name="notifications-outline"
           size={32}
-          style={{ marginRight: 10, marginTop: 50 }}
+          style={{ right: 10, marginTop: 50, position: "absolute" }}
           color="white"
         />
         <Image
@@ -91,7 +92,7 @@ const Profile = () => {
             width: 60,
             height: 60,
             marginRight: 350,
-            marginTop: 60,
+            marginTop: 140,
           }}
         />
         <Text

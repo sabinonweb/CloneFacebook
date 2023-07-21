@@ -11,7 +11,7 @@ import {
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-const SellerModeOff = () => {
+const SellerModeOff = ({ handleSwitch, switchClicked }) => {
   const meroData = [
     {
       name: "Get Inspired",
@@ -42,7 +42,7 @@ const SellerModeOff = () => {
   const settingsData = [
     {
       name: "Preferences",
-      icon: "paper-plane-outline",
+      icon: "print-outline",
       id: 4,
       arrow: "chevron-forward-outline",
     },
@@ -75,10 +75,6 @@ const SellerModeOff = () => {
     },
   ];
 
-  const [switchClicked, setSwitchClicked] = useState(false);
-  const handleSwitch = () => {
-    setSwitchClicked((prevState) => !prevState);
-  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View
@@ -87,13 +83,13 @@ const SellerModeOff = () => {
           backgroundColor: "#820303",
           justifyContent: "flex-start",
           alignItems: "flex-end",
-          marginTop: -59,
+          // marginTop: -59,
         }}
       >
         <Ionicons
           name="notifications-outline"
           size={32}
-          style={{ marginRight: 10, marginTop: 50 }}
+          style={{ right: 10, marginTop: 50, position: "absolute" }}
           color="white"
         />
         <Image
@@ -103,7 +99,7 @@ const SellerModeOff = () => {
             width: 60,
             height: 60,
             marginRight: 350,
-            marginTop: 60,
+            marginTop: 140,
           }}
         />
         <Text

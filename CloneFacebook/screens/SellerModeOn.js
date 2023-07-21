@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import SellerModeOff from "./SellerModeOff";
 
-const SellerModeOn = () => {
+const Profile = () => {
   const sellerData = [
     {
       name: "My Profile",
@@ -58,11 +58,15 @@ const SellerModeOn = () => {
   ];
 
   const [switchClicked, setSwitchClicked] = useState(false);
+  const [changeMode, setChangeMode] = useState(false);
   const handleSwitch = () => {
     setSwitchClicked((prevState) => !prevState);
+    setChangeMode((prevMode) => !prevMode);
+    console.log(changeMode);
   };
 
-  return (
+  return changeMode ? (
+    //SellerModeOn
     <SafeAreaView style={{ flex: 1 }}>
       <View
         style={{
@@ -76,7 +80,7 @@ const SellerModeOn = () => {
         <Ionicons
           name="notifications-outline"
           size={32}
-          style={{ marginRight: 10, marginTop: 50 }}
+          style={{ marginRight: 10, marginTop: 50, position: "absolute" }}
           color="white"
         />
         <Image
@@ -86,7 +90,7 @@ const SellerModeOn = () => {
             width: 60,
             height: 60,
             marginRight: 350,
-            marginTop: 60,
+            marginTop: 120,
           }}
         />
         <Text
@@ -146,8 +150,8 @@ const SellerModeOn = () => {
             trackColor={{ false: "#f0bbbb", true: "#bbf0bf" }}
             thumbColor={switchClicked ? "#038209" : "#820303"}
             ios_backgroundColor="#f0bbbb"
-            onChange={handleSwitch}
-            value={switchClicked}
+            onChange={(value) => setSwitchClicked(value)}
+            value={handleSwitch}
             style={{ alignSelf: "flex-end", bottom: 10 }}
           />
         </View>
@@ -212,7 +216,13 @@ const SellerModeOn = () => {
         </ScrollView>
       </View>
     </SafeAreaView>
+  ) : (
+    <SellerModeOff
+      handleSwitch={handleSwitch}
+      switchClicked={switchClicked}
+      setSwitchClicked={setSwitchClicked}
+    ></SellerModeOff>
   );
 };
 
-export default SellerModeOn;
+export default Profile;
