@@ -39,7 +39,7 @@ const App = () => {
       >
         {HomeScreen}
         <Tab.Screen
-          name="Home"
+          name="Homeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
           component={HomeScreen}
           options={{ headerShown: false }}
           backBehaviour="none"
